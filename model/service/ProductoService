@@ -1,0 +1,31 @@
+package com.example.inventory.service;
+
+import com.example.inventory.model.Producto;
+import com.example.inventory.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductoService {
+    @Autowired
+    private ProductoRepository repository;
+
+    public List<Producto> obtenerTodos() {
+        return repository.findAll();
+    }
+
+    public Producto agregarProducto(Producto producto) {
+        return repository.save(producto);
+    }
+
+    public Producto editarProducto(Long id, Producto producto) {
+        producto.setId(id);
+        return repository.save(producto);
+    }
+
+    public void eliminarProducto(Long id) {
+        repository.deleteById(id);
+    }
+}
